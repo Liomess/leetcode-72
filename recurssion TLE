@@ -1,0 +1,23 @@
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        def solve(self,word1,word2,n,i,m,j):
+            if i>n-1 or j>m-1:
+                if i>n-1:
+                    return m-j
+                else:
+                    return n-i
+            op1,op2,op3=float('inf'),float('inf'),float('inf')
+            if word1[i]==word2[j]:
+                return solve(self,word1,word2,n,i+1,m,j+1)
+            else:
+                op1=1+solve(self,word1,word2,n,i+1,m,j)
+                op2=1+solve(self,word1,word2,n,i,m,j+1)
+                op3=1+solve(self,word1,word2,n,i+1,m,j+1)
+            return min(op1,min(op2,op3))
+        n=len(word1)
+        m=len(word2)
+        if m==0:
+            return n
+        if n==0:
+            return m
+        return solve(self,word1,word2,n,0,m,0)   
